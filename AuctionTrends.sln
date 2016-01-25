@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionTrends", "AuctionTrends\AuctionTrends.csproj", "{8458273D-CF18-441F-837B-18E660C632FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionTrends.Server", "AuctionTrends.Server\AuctionTrends.Server.csproj", "{7169BB4D-59C0-427E-ADA2-371E08326EE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionTrends.Common", "AuctionTrends.Common\AuctionTrends.Common.csproj", "{5F7951CC-FE51-40CB-8D07-773FF5B85D43}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuctionTrends.ItemCacheScanner", "AuctionTrends.ItemCacheScanner\AuctionTrends.ItemCacheScanner.csproj", "{BF68056F-876F-48E6-BE90-695D685ACEC2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8458273D-CF18-441F-837B-18E660C632FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8458273D-CF18-441F-837B-18E660C632FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8458273D-CF18-441F-837B-18E660C632FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8458273D-CF18-441F-837B-18E660C632FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7169BB4D-59C0-427E-ADA2-371E08326EE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7169BB4D-59C0-427E-ADA2-371E08326EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7169BB4D-59C0-427E-ADA2-371E08326EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7169BB4D-59C0-427E-ADA2-371E08326EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F7951CC-FE51-40CB-8D07-773FF5B85D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F7951CC-FE51-40CB-8D07-773FF5B85D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F7951CC-FE51-40CB-8D07-773FF5B85D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F7951CC-FE51-40CB-8D07-773FF5B85D43}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF68056F-876F-48E6-BE90-695D685ACEC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF68056F-876F-48E6-BE90-695D685ACEC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF68056F-876F-48E6-BE90-695D685ACEC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF68056F-876F-48E6-BE90-695D685ACEC2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

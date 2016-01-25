@@ -1,0 +1,125 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:AuctionTrends.Controls"
+      xmlns:extToolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:cachedImage="clr-namespace:CachedImage;assembly=CachedImage"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts" xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core" xmlns:Models="clr-namespace:AuctionTrends.Common.Models;assembly=AuctionTrends.Common"
+    xmlns:auctionTrends="clr-namespace:AuctionTrends"
+    x:Class="AuctionTrends.Graph"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Graph" Height="638" Width="1252">
+
+    <Page.Resources>
+        <dx:IEnumerableDataSource x:Key="IEnumerableDataSource1">
+            <dx:DesignDataManager.DesignData>
+                <dx:DesignDataSettings DataObjectType="{x:Type auctionTrends:GraphPoint}" RowCount="40"/>
+            </dx:DesignDataManager.DesignData>
+        </dx:IEnumerableDataSource>
+    </Page.Resources>
+
+    <Grid x:Name="canGraph" Margin="2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <extToolkit:WatermarkTextBox x:Name="searchBox" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="264" Watermark="Search" TextChanged="searchBox_TextChanged" LostFocus="search_LostFocus"/>
+        <Button Grid.Column="0" x:Name="searchButton" HorizontalAlignment="Left" Margin="279,10,0,0" VerticalAlignment="Top" Width="24" Height="23">
+            <Image Source="Resources/Search Button.png" />
+        </Button>
+
+        <Border Grid.Column="0" Margin="10,48,10,530" Width="293" Height="60" BorderThickness="1" BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+            <local:ItemFrame x:Name="selectedItem" />
+        </Border>
+
+        <Label Grid.Column="0" Content="From:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,113,0,0" />
+        <DatePicker x:Name="startDate" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="55,115,0,0" Width="107" />
+        <Label Grid.Column="0" Content="To:" Margin="166,113,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <DatePicker x:Name="endDate" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="196,116,0,0" Width="107" SelectedDate="{x:Static sys:DateTime.Now}" />
+
+        <Grid Grid.Column="0" VerticalAlignment="Top" Margin="5,154,5,0">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <CheckBox x:Name="adjustedMeanCheck" Grid.Row="0" Grid.Column="0" Content="Adjusted Mean" Foreground="#4F81BD" IsChecked="true" />
+            <CheckBox x:Name="meanCheck" Grid.Row="0" Grid.Column="1" Content="Mean" Foreground="#C0504D" IsChecked="True"/>
+            <CheckBox x:Name="lowValueCheck" Grid.Row="2" Grid.Column="0" Content="Lowest Sell Price" Foreground="#9BBB59"/>
+            <CheckBox x:Name="highValueCheck" Grid.Row="2" Grid.Column="1" Content="Highest Sell Price" Foreground="#8064A2"/>
+            <CheckBox x:Name="quantityCheck" Grid.Row="3" Grid.Column="0" Content="Quantity" Foreground="#E78AC3" />
+        </Grid>
+       
+        <StackPanel x:Name="emptyGraphPanel" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1">
+            <Label Content="Select an item to load the graph." />
+        </StackPanel>
+
+        <dxc:ChartControl x:Name="chart" Grid.Column="1" DataSource="{Binding Data, Source={StaticResource IEnumerableDataSource1}}" Visibility="Collapsed">
+            <dxc:ChartControl.Palette>
+                <dxc:CustomPalette>
+                    <dxc:CustomPalette.Colors>
+                        <Color>#4F81BD</Color>
+                        <Color>#C0504D</Color>
+                        <Color>#9BBB59</Color>
+                        <Color>#8064A2</Color>
+                        <Color>#E78AC3</Color>
+                    </dxc:CustomPalette.Colors>
+                </dxc:CustomPalette>
+            </dxc:ChartControl.Palette>
+            <dxc:XYDiagram2D x:Name="diagram">
+                <dxc:XYDiagram2D.AxisY>
+                    <dxc:AxisY2D MinorCount="4" GridLinesVisible="True">
+                        <dxc:AxisY2D.DateTimeScaleOptions>
+                            <dxc:ContinuousDateTimeScaleOptions/>
+                        </dxc:AxisY2D.DateTimeScaleOptions>
+                        <dxc:AxisY2D.NumericScaleOptions>
+                            <dxc:ContinuousNumericScaleOptions/>
+                        </dxc:AxisY2D.NumericScaleOptions>
+                    </dxc:AxisY2D>
+                </dxc:XYDiagram2D.AxisY>
+                <dxc:XYDiagram2D.AxisX>
+                    <dxc:AxisX2D GridLinesMinorVisible="false" GridLinesVisible="true">
+                        <dxc:AxisX2D.DateTimeScaleOptions>
+                            <dxc:ManualDateTimeScaleOptions AggregateFunction="Financial" MeasureUnit="Hour"/>
+                        </dxc:AxisX2D.DateTimeScaleOptions>
+                    </dxc:AxisX2D>
+                </dxc:XYDiagram2D.AxisX>
+                <dxc:LineSeries2D x:Name="adjustedMeanSeries" DisplayName="Market Value"/>
+                <dxc:LineSeries2D x:Name="meanSeries" DisplayName="Median"/>
+                <dxc:LineSeries2D x:Name="lowestSeries" DisplayName="Lowest Sell Price"/>
+                <dxc:LineSeries2D x:Name="highestSeries" DisplayName="Highest Sell Price"/>
+                <dxc:LineSeries2D x:Name="quantitySeries" DisplayName="Quantity" />
+            </dxc:XYDiagram2D>
+        </dxc:ChartControl>
+        
+        <StackPanel x:Name="loadingPanel" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed">
+            <Label x:Name="loadingStatus" Content="Loading Data..." HorizontalAlignment="Center"/>
+            <ProgressBar IsIndeterminate="True" />
+        </StackPanel>
+
+        <Border BorderBrush="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}" BorderThickness="1" Grid.Column="0">
+            <StackPanel x:Name="searchResultsPanel" HorizontalAlignment="Left" Margin="10,33,0,0" VerticalAlignment="Top" Width="293" Visibility="Hidden">
+                <StackPanel x:Name="searchLoading" HorizontalAlignment="Left" Height="60" Margin="0" VerticalAlignment="Top" Width="293" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+                    <StackPanel Margin="0,12,0,20">
+                        <Label Content="Loading..." HorizontalAlignment="Center" />
+                        <ProgressBar IsIndeterminate="true" />
+                    </StackPanel>
+                </StackPanel>
+                <local:ItemFrame x:Name="searchResult1" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Visibility="Collapsed" MouseEnter="searchResult_MouseEnter" MouseLeave="searchResult_MouseLeave" MouseUp="searchResult_MouseUp"/>
+                <local:ItemFrame x:Name="searchResult2" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Visibility="Collapsed" MouseEnter="searchResult_MouseEnter" MouseLeave="searchResult_MouseLeave" MouseUp="searchResult_MouseUp"/>
+                <local:ItemFrame x:Name="searchResult3" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Visibility="Collapsed" MouseEnter="searchResult_MouseEnter" MouseLeave="searchResult_MouseLeave" MouseUp="searchResult_MouseUp"/>
+                <local:ItemFrame x:Name="searchResult4" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Visibility="Collapsed" MouseEnter="searchResult_MouseEnter" MouseLeave="searchResult_MouseLeave" MouseUp="searchResult_MouseUp"/>
+                <local:ItemFrame x:Name="searchResult5" Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Visibility="Collapsed" MouseEnter="searchResult_MouseEnter" MouseLeave="searchResult_MouseLeave" MouseUp="searchResult_MouseUp"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>
